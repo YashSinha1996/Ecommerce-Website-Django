@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Obaju e-commerce template">
+    <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
+    <meta name="keywords" content="">
+
+    <title>
+        Obaju : e-commerce template
+    </title>
+
+    <meta name="keywords" content="">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+
+    <!-- styles -->
+    <link href="/static/ecommerce2/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/animate.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.carousel.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.theme.css" rel="stylesheet">
+
+    <!-- theme stylesheet -->
+    <link href="/static/ecommerce2/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- your stylesheet with modifications -->
+    <link href="/static/ecommerce2/css/custom.css" rel="stylesheet">
+
+    <script src="/static/ecommerce2/js/respond.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.png">
+<link rel="shortcut icon" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
+    <script src="/static/ecommerce2/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap.min.js"></script>
+    <script src="/static/ecommerce2/js/jquery.cookie.js"></script>
+    <script src="/static/ecommerce2/js/waypoints.min.js"></script>
+    <script src="/static/ecommerce2/js/modernizr.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/static/ecommerce2/js/owl.carousel.min.js"></script>
+    <script src="/static/ecommerce2/js/front.js"></script>
+
+
+    <base href="/ecommerce2/">
+</head>
+
+<body>
+    <!-- *** TOPBAR ***
+ _________________________________________________________ -->
+<div id="topbar">
+{% include "topbar.html" %} 
+</div> 
+
+    <!-- *** TOP BAR END *** -->
+
+    <!-- *** NAVBAR ***
+ _________________________________________________________ -->
+
+    <div id="navigationbar"> {% include "navbar.html" %} </div> 
+    <!-- *** NAVBAR END *** -->
+    <!-- *** NAVBAR END *** -->
+
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="index">Home</a>
+                        </li>
+                        {% for sup_cat in sup_cats %}
+                        <li><a href="category.html/{{ sup_cat.categoryid }}">{{ sup_cat.categoryname }}</a></li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+                <div class="col-md-3">
+                    {% include "leftmenu.html" %}
+                </div>
+
+                <div class="col-md-9">
+
+                    <div class="row" id="productMain">
+                        <div class="col-sm-6">
+                            <div id="mainImage">
+                                <img src="/static/ecommerce2/{{ prod_view.productimage }}" alt="" class="img-responsive">
+                            </div>
+                            <!--
+                            <div class="ribbon sale">
+                                <div class="theribbon">opt1</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+
+                            <div class="ribbon new">
+                                <div class="theribbon">opt2</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            -->
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <h1 class="text-center">{{ prod_view.productname }}</h1>
+                                <p class="goToDescription"><a href="#details" class="scroll-to">{{ prod_view.productshortdesc }}</a>
+                                </p>
+                                <p class="price">{{ prod_view.productprice }}</p>
+                                <form action="cart" method="post">
+                                {% csrf_token %}
+                                    <input type="hidden" name="productid" value="{{ prod_view.productid }}">
+                                    <p class="text-center buttons">
+                                        <span>Quantity:<input type="number" name="quantity" value="1"></span>
+                                        <button  type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button> 
+                                    </p>
+                                </form>
+
+
+                            </div>
+
+                            <div class="row" id="thumbs">
+                                <div class="col-xs-4">
+                                    <a href="/static/ecommerce2/{{ prod_view.productimage }}" class="thumb">
+                                        <img src="/static/ecommerce2/{{ prod_view.productimage }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="/static/ecommerce2/{{ prod_view.productimage2 }}" class="thumb">
+                                        <img src="/static/ecommerce2/{{ prod_view.productimage2 }}" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="box" id="details">
+                        {% autoescape off %}
+                        <p>
+                            {{ prod_view.productlongdesc }}
+                        <p>
+                        {% endautoescape %}
+                    </div>
+                    {% if rev %}
+                    <div id="post-content">
+                        <h1>Reviews:</h1>
+                        {% for revv,name in rev %}
+                        <h3>{{ name }}</h3>
+                        <h5>{{ revv.rating }}/5</h5>
+                        <blockquote>
+                            {{ revv.review }}
+                        </blockquote>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if review %}
+                    <form action="review" method="post">
+                    {% csrf_token %}
+                    <h3>Give your Own Review:</h3>
+                    <input type="hidden" name="productid" value="{{ prod_view.productid }}">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="rating">Rating: 
+                                        </label>
+                                        <input type="radio" name="rating" value="1" required>1 &nbsp; </input>
+                                        <input type="radio" name="rating" value="2" required>2 &nbsp; </input>
+                                        <input type="radio" name="rating" value="3" required>3 &nbsp; </input>
+                                        <input type="radio" name="rating" value="4" required>4 &nbsp; </input>
+                                        <input type="radio" name="rating" value="5" required>5 &nbsp; </input>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="comment">Review:
+                                            </label>
+                                            <textarea class="form-control" id="comment" rows="4" name="review"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 text-right">
+                                        <button class="btn btn-primary"><i class="fa fa-comment-o"></i> Post Review</button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                            {% endif %}
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+         <div id="foot_copy"> {% include "footer.html" %} </div>
+
+
+    </div>
+    <!-- /#all -->
+
+
+    
+
+ 
+
+
+
+
+
+</body>
+
+</html>

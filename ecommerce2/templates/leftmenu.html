@@ -1,0 +1,33 @@
+<!-- *** MENUS AND FILTERS ***
+_________________________________________________________ -->
+<div class="panel panel-default sidebar-menu">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Categories</h3>
+    </div>
+
+    <div class="panel-body">
+        <ul class="nav nav-pills nav-stacked category-menu">
+            {% for name,catogorie in cat %}
+            <li>
+                <a href="category.html/{{ name.categoryid }}">{{ name.categoryname }}</a>
+                <ul>
+                {% for sub_name,sub_cat in catogorie %}
+                    <li><a href="category.html/{{ sub_name.categoryid }}">{{ sub_name.categoryname }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+<!-- *** MENUS AND FILTERS END *** -->
+
+<div class="banner">
+    <a href="#">
+        <img src="/static/ecommerce2/img/banner.jpg" alt="sales 2014" class="img-responsive">
+    </a>
+</div>

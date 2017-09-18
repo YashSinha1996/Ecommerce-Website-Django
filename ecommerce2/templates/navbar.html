@@ -1,0 +1,99 @@
+<div class=navbar navbar-default yamm" role="navigation" id="navbar">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
+                <img src="/static/ecommerce2/img/logo.png" alt="Obaju logo" class="hidden-xs">
+                <img src="/static/ecommerce2/img/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">HOME</span>
+            </a>
+            <div class="navbar-buttons">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
+                    <span class="sr-only">Toggle search</span>
+                    <i class="fa fa-search"></i>
+                </button>
+                <a class="btn btn-default navbar-toggle" href="basket.html">
+                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+                </a>
+            </div>
+        </div>
+        <!--/.navbar-header -->
+
+        <div class="navbar-collapse collapse" id="navigation">
+
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active"><a href="/ecommerce2/">Home</a>
+                </li>
+                {%if cat%}
+                    {% for name,catogorie in cat %}
+                        <li class="dropdown yamm-fw">
+
+                            <a href="category.html/{{ name.categoryid }}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">{{ name.categoryname }} <b class="caret"></b></a>
+                            
+                            <ul class="dropdown-menu">
+                            {% for sub_name,sub_cat in catogorie %}
+                                <li>
+                                    <div class="yamm-content">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h5><a href="category.html/{{ sub_name.categoryid }}">{{ sub_name.categoryname }}</a></h5>
+                                                <ul>
+                                                {% for sub_sub_cat in sub_cat %}
+                                                    <li><a href="category.html/{{ sub_sub_cat.categoryid }}">{{ sub_sub_cat.categoryname }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.yamm-content -->
+                                </li>
+                            {% endfor %}
+                            </ul>
+                            
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+            </ul>
+
+        </div>
+
+        <!--/.nav-collapse -->
+        <div class="navbar-buttons">
+        {% if user %}
+            <div class="navbar-collapse collapse right" id="basket-overview">
+                <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">{{in_cart}} item(s) in cart</span></a>
+            </div>
+                <!--/.nav-collapse -->
+        {% endif %}
+        <div class="navbar-collapse collapse right" id="search-not-mobile">
+            <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                <span class="sr-only">Toggle search</span>
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+
+        </div>
+
+        <div class="collapse clearfix" id="search">
+
+            <form class="navbar-form" role="search" action="search" method="post">
+            {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    <span class="input-group-btn">
+            		  <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+            	    </span>
+                </div>
+            </form>
+
+        </div>
+        <!--/.nav-collapse -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#navbar -->

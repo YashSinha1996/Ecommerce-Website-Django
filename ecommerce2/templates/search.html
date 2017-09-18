@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Obaju e-commerce template">
+    <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
+    <meta name="keywords" content="">
+
+    <title>
+        Obaju : e-commerce template
+    </title>
+
+    <meta name="keywords" content="">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+
+    <!-- styles -->
+    <link href="/static/ecommerce2/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/animate.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.carousel.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.theme.css" rel="stylesheet">
+
+    <!-- theme stylesheet -->
+    <link href="/static/ecommerce2/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- your stylesheet with modifications -->
+    <link href="/static/ecommerce2/css/custom.css" rel="stylesheet">
+
+    <script src="/static/ecommerce2/js/respond.min.js"></script>
+
+   <link rel="shortcut icon" href="favicon.png">
+    <script src="/static/ecommerce2/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap.min.js"></script>
+    <script src="/static/ecommerce2/js/jquery.cookie.js"></script>
+    <script src="/static/ecommerce2/js/waypoints.min.js"></script>
+    <script src="/static/ecommerce2/js/modernizr.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/static/ecommerce2/js/owl.carousel.min.js"></script>
+    <script src="/static/ecommerce2/js/front.js"></script>
+
+    <base href="/ecommerce2/">
+</head>
+
+<body>
+    <!-- *** TOPBAR ***
+ _________________________________________________________ -->
+<div id="topbar">
+{% include "topbar.html" %} 
+</div> 
+
+    <!-- *** TOP BAR END *** -->
+
+    <!-- *** NAVBAR ***
+ _________________________________________________________ -->
+
+    {% include "navbar.html" %}
+    <!-- *** NAVBAR END *** -->
+
+
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="index">Home</a>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <!-- *** PAGES MENU ***
+ _________________________________________________________ -->
+                        {% include "leftmenu.html" %}
+
+                    <!-- *** PAGES MENU END *** -->
+                </div>
+
+                <div class="col-md-9">
+
+                    <div class="box" id="text-page">
+                        <h1>Search Results:</h1>
+                        <p>Query: "{{ term }}"</p>
+                    </div>
+                        {% if total %}
+                        
+                        <div class="col-md-9">
+                        {% if ct %}
+                            <div class="panel panel-default">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Categories</h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        {% for match in cats %}
+                                        <li>
+                                            <a href="category.html/{{ match.categoryid }}">{{ match.categoryname }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                            {% endif %}
+                            {% if pt %}
+                        <div class="col-md-9" id="basket">
+                        <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        {% for product in products %}
+                                        <tr>
+                                            <td>
+                                                <a href="detail.html/{{ product.productid }}">
+                                                    <img src="/static/ecommerce2/{{ product.productimage }}" alt="{{ product.productname }}">
+                                                </a>
+                                            </td>
+                                            <td><a href="detail.html/{{ product.productid }}">{{ product.productname }}</a>
+                                            </td>
+                                            <td>{{ info.detailprice }}</td>
+                                            <td>{{ product.productshortdesc }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                    </div>
+                    </div>
+                    {% endif %}
+
+
+                </div>
+                <!-- /.col-md-9 -->
+                {% else %}
+                <div class="box" id="text-page">
+                        <h2>No Results Found !!</h2>
+                </div>
+                {% endif %}
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+         <div id="foot_copy"> {% include "footer.html" %} </div>
+
+
+    </div>
+    <!-- /#all -->
+
+
+    
+
+ 
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Obaju e-commerce template">
+    <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
+    <meta name="keywords" content="">
+
+    <title>
+        Obaju : e-commerce template
+    </title>
+
+    <meta name="keywords" content="">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+
+    <!-- styles -->
+    <link href="/static/ecommerce2/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/animate.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.carousel.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.theme.css" rel="stylesheet">
+
+    <!-- theme stylesheet -->
+    <link href="/static/ecommerce2/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- your stylesheet with modifications -->
+    <link href="/static/ecommerce2/css/custom.css" rel="stylesheet">
+
+    <script src="/static/ecommerce2/js/respond.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.png">
+
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
+    <script src="/static/ecommerce2/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap.min.js"></script>
+    <script src="/static/ecommerce2/js/jquery.cookie.js"></script>
+    <script src="/static/ecommerce2/js/waypoints.min.js"></script>
+    <script src="/static/ecommerce2/js/modernizr.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/static/ecommerce2/js/owl.carousel.min.js"></script>
+    <script src="/static/ecommerce2/js/front.js"></script>
+
+
+ 
+
+
+
+    <base href="/ecommerce2/">
+</head>
+
+<body>
+    <!-- *** TOPBAR ***
+ _________________________________________________________ -->
+<div id="topbar">
+{% include "topbar.html" %} 
+</div> 
+
+    <!-- *** TOP BAR END *** -->
+
+    <!-- *** NAVBAR ***
+ _________________________________________________________ -->
+
+    <div id="navigationbar"> {% include "navbar.html" %} </div> 
+    <!-- *** NAVBAR END *** -->
+
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+
+                <div class="col-md-12">
+
+                    <ul class="breadcrumb">
+                        <li><a href="index">Home</a>
+                        </li>
+                        <li>My account</li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-3">
+                    <!-- *** CUSTOMER MENU ***
+ _________________________________________________________ -->
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Customer section</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <ul class="nav nav-pills nav-stacked">
+                                <li>
+                                    <a href="customer-orders.html"><i class="fa fa-list"></i> My orders</a>
+                                </li>
+                                <li class="active">
+                                    <a href="customer-account.html"><i class="fa fa-user"></i> My account</a>
+                                </li>
+                                <li>
+                                    <a href="logout"><i class="fa fa-sign-out"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+                    <!-- *** CUSTOMER MENU END *** -->
+                </div>
+
+                <div class="col-md-9">
+                    <div class="box">
+                        <h1>My account</h1>
+                        <p class="lead">Change your personal details or your password here.</p>
+                        <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+                        <h3>Change password</h3>
+
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="password_old">Old password</label>
+                                        <input type="password" class="form-control" id="password_old" name="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="password_1">New password</label>
+                                        <input type="password" class="form-control" id="password_1">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="password_2">Retype new password</label>
+                                        <input type="password" class="form-control" id="password_2">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save new password</button>
+                            </div>
+                        </form>
+
+                        <hr>
+
+                        <h3>Personal details</h3>
+                        <form>
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="firstname">Firstname</label>
+                                        <input type="text" class="form-control" id="firstname" name="firstname" {% if user_d.userfirstname %} value="{{ user_d.userfirstname }}" {% endif %}></input>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="lastname">Lastname</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname" {% if user_d.userlastname %} value="{{ user_d.userlastname }}" {% endif %} ></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="company">House Number</label>
+                                        <input type="text" class="form-control" id="house" {% if user_d.useraddress  %} value="{{ user_d.useraddress  }}" {% endif %} >
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="street">Street</label>
+                                        <input type="text" class="form-control" id="street" {% if user_d.useraddress2  %} value="{{ user_d.useraddress2  }}" {% endif %} >
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="zip">ZIP</label>
+                                            <input type="text" class="form-control" id="zip" name="zipcode" {% if user_d.userzip  %} value="{{ user_d.userzip  }}" {% endif %} ></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="state">City</label>
+                                            <input type="text" class="form-control" id="city" name="city" {% if user_d.useraddress2  %} value="{{ user_d.usercity  }}" {% endif %} ></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="state">State</label>
+                                            <input type="text" class="form-control" id="state" name="state" {% if user_d.userstate  %} value="{{ user_d.userstate  }}" {% endif %} ></input>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="country">Country</label>
+                                            <input type="text" class="form-control" id="country" name="country" {% if user_d.usercountry %} value="{{ user_d.usercountry  }}" {% endif %}></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">Telephone</label>
+                                            <input type="text" class="form-control" id="phone" name="phone" value="{{ user_d.userphone }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="text" class="form-control" id="email" name="email" value="{{ user_d.useremail }}">
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+         <div id="foot_copy"> {% include "footer.html" %} </div>
+
+
+    </div>
+    <!-- /#all -->
+
+
+    
+
+ 
+
+
+</body>
+
+</html>

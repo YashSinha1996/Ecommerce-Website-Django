@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="robots" content="all,follow">
+    <meta name="googlebot" content="index,follow,snippet,archive">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Obaju e-commerce template">
+    <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
+    <meta name="keywords" content="">
+
+    <title>
+        Obaju : e-commerce template
+    </title>
+
+    <meta name="keywords" content="">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+
+    <!-- styles -->
+    <link href="/static/ecommerce2/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/animate.min.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.carousel.css" rel="stylesheet">
+    <link href="/static/ecommerce2/css/owl.theme.css" rel="stylesheet">
+
+    <!-- theme stylesheet -->
+    <link href="/static/ecommerce2/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+    <!-- your stylesheet with modifications -->
+    <link href="/static/ecommerce2/css/custom.css" rel="stylesheet">
+
+    <script src="/static/ecommerce2/js/respond.min.js"></script>
+
+    <link rel="shortcut icon" href="favicon.png">
+
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
+    <script src="/static/ecommerce2/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap.min.js"></script>
+    <script src="/static/ecommerce2/js/jquery.cookie.js"></script>
+    <script src="/static/ecommerce2/js/waypoints.min.js"></script>
+    <script src="/static/ecommerce2/js/modernizr.js"></script>
+    <script src="/static/ecommerce2/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/static/ecommerce2/js/owl.carousel.min.js"></script>
+    <script src="/static/ecommerce2/js/front.js"></script>
+
+
+ 
+
+
+
+    <base href="/ecommerce2/">
+</head>
+
+<body>
+    <!-- *** TOPBAR ***
+ _________________________________________________________ -->
+<div id="topbar">
+{% include "topbar.html" %} 
+</div> 
+
+    <!-- *** TOP BAR END *** -->
+
+    <!-- *** NAVBAR ***
+ _________________________________________________________ -->
+
+    <div id="navigationbar"> {% include "navbar.html" %} </div> 
+    <!-- *** NAVBAR END *** -->
+    <div id="all">
+
+        <div id="content">
+            <div class="container">
+
+                <div class="col-md-12">
+
+                    <ul class="breadcrumb">
+                        <li><a href="../index.html">Home</a>
+                        </li>
+                        <li><a href="../customer-orders.html">My orders</a>
+                        </li>
+                        <li>Order #{{ order_d.orderid }}</li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-3">
+                    <!-- *** CUSTOMER MENU ***
+ _________________________________________________________ -->
+                    <div class="panel panel-default sidebar-menu">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Customer section</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="active">
+                                    <a href="customer-orders.html"><i class="fa fa-list"></i> My orders</a>
+                                </li>
+                                <li>
+                                    <a href="customer-account.html"><i class="fa fa-user"></i> My account</a>
+                                </li>
+                                <li>
+                                    <a href="index.html"><i class="fa fa-sign-out"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+                    <!-- *** CUSTOMER MENU END *** -->
+                </div>
+
+                <div class="col-md-9" id="customer-order">
+                    <div class="box">
+                        <h1>Order #{{order_d.orderid}}</h1>
+
+                        <p class="lead">Order #{{ order_d.orderid }} was placed on <strong>{{ order_d.orderdate }}</strong> and <strong>{{ shipped }}</strong>
+                        {% if order_d.ordershipped == 1 %} <strong> with tracking number {{ order_d.ordertrackingnumber }}</strong> {% endif %}.</p>
+                        <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+
+                        <hr>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Product</th>
+                                        <th>Quantity</th>
+                                        <th>Unit price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product,quantity,price,net in products %}
+                                    <tr>
+                                        <td>
+                                            <a href="detail.html/{{ product.productid }}">
+                                                <img src="/static/ecommerce2/{{ product.productimage }}" alt="{{ product.productname }}">
+                                            </a>
+                                        </td>
+                                        <td><a href="detail.html/{{ product.productid }}">{{ product.productname }}</a>
+                                        </td>
+                                        <td>{{ quantity }}</td>
+                                        <td>Rs. {{ price }}</td>
+                                        <td>Rs. {{ net }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="5" class="text-right">Order subtotal</th>
+                                        <th>Rs. {{ net_total }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" class="text-right">Shipping and handling</th>
+                                        <th>Rs. {{ order_d.ordershipping }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" class="text-right">Tax</th>
+                                        <th>Rs. {{ order_d.ordertax }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" class="text-right">Total</th>
+                                        <th>Rs. {{ order_d.orderamount }}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                        <!-- /.table-responsive -->
+
+                        <div class="row addresses">
+                            <div class="col-md-6">
+                                <h2>Address</h2>
+                                <p>{{ user_name }}
+                                    <br>{{ order_d.orderphone }}
+                                    <br>{{ order_d.orderaddress2 }}
+                                    <br>{{ order_d.orderaddress }}
+                                    <br>{{ order_d.orderzip }}
+                                    <br>{{ order_d.orderstate }}
+                                    <br>{{ order_d.ordercountry }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+         <div id="foot_copy"> {% include "footer.html" %} </div>
+
+
+    </div>
+    <!-- /#all -->
+
+
+    
+
+ 
+
+
+</body>
+
+</html>
